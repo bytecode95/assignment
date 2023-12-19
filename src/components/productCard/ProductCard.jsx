@@ -8,7 +8,7 @@ import Ratings from '../rating/Ratings';
 const ProductCard = ({ id, name, description, price, rating, ratedBy, image }) => {
 
   const navigate = useNavigate();
-  const { addtoCart } = useStateContext();
+  const { addtoCart} = useStateContext();
 
   const handleAddToCart = () => {
     addtoCart({
@@ -35,7 +35,7 @@ const ProductCard = ({ id, name, description, price, rating, ratedBy, image }) =
         <Card.Body>
           <div className='d-flex align-items-center justify-content-between'>
             <h6 className='font-bold'>{name}</h6>
-            <h6>Price: ${price}</h6>
+            <h6>Price: {price}</h6>
           </div>
           <Card.Text style={{ fontSize: '12px' }}>{description}</Card.Text>
           <div className='d-flex align-items-center justify-content-start mb-2'>

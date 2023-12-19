@@ -5,11 +5,9 @@ import { Stack, Button } from "react-bootstrap"
 const SideBar = () => {
 
   const { cartItem, cartQuantity } = useStateContext();
-  //console.log(cartItem);
-
- let total=0;
+  let total = 0;
   cartItem.forEach(item => {
-     total+=item.price*item.quantity;
+    total += item.price * item.quantity;
   });
 
 
@@ -46,8 +44,8 @@ const SideBar = () => {
               }
               <hr />
               <div className='ms-auto d-flex flex-column w-25 '>
-                <div style={{fontWeight:'bold'}}>Total: ${total}</div>
-                <Button onClick={() => {}} variant="outline-secondary" style={{ borderRadius: '20px', paddingInline: '15px', marginTop: '10px', marginBottom: '15px' }}>Checkout</Button>
+                <div style={{ fontWeight: 'bold' }}>Total: ${total}</div>
+                <Button onClick={() => { }} variant="outline-secondary" style={{ borderRadius: '20px', paddingInline: '15px', marginTop: '10px', marginBottom: '15px' }}>Checkout</Button>
               </div>
             </Dropdown.Menu>
           )}

@@ -1,15 +1,12 @@
 /* eslint-disable react/prop-types */
 import Rating from '@mui/material/Rating';
 
-
-
-
 const Ratings = ({rating}) => {
  
 
   return (
     <div>
-       <Rating style={{color:'green'}} name="read-only" value={rating} readOnly />
+       <Rating style={{color:'green'}} value={rating} readOnly />
     </div>
   )
 }

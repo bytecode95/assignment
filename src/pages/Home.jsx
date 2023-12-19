@@ -4,16 +4,12 @@ import { Container, Row, Col } from 'react-bootstrap';
 
 const Home = () => {
   const { ecommerceData } = useStateContext();
-  
 
   if (!ecommerceData || !ecommerceData.products) {
     return <div>Loading...</div>;
   }
-
-
+  
   const { products } = ecommerceData;
-  //console.log(products);
-
   return (
     <>
       <h2 className="font-bold mt-3 mb-3">Best Seller</h2>

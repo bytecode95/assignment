@@ -6,10 +6,8 @@ import { useStateContext } from "../context/ContextProvider";
 
 const ProductDetail = () => {
   const { id } = useParams();
-
   const { setProduct } = useStateContext();
 
-  // Set the productId in the context and fetch details
   useEffect(() => {
     setProduct(id);
   }, [id, setProduct]);

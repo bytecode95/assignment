@@ -1,20 +1,12 @@
 import Button from 'react-bootstrap/Button';
 import { Container } from 'react-bootstrap';
-import Ratings from '../rating/Ratings';
-
+import { Ratings, ThemeSetting } from '../index';
 import { useStateContext } from '../../context/ContextProvider';
 
 const ProductDetails = () => {
-
-
-  const { details, increaseQuantity, decreaseQuantity, getItemQuantity } = useStateContext();
-  //console.log(details);
-
-
+  const { details, increaseQuantity, decreaseQuantity, getItemQuantity, currentColor } = useStateContext();
   const { id, name, description, price, rating, ratedBy, image } = details;
-
   const roundPrice = Math.round(price / 6).toFixed(2);
-
   const amount = getItemQuantity(id);
 
   return (
@@ -22,12 +14,12 @@ const ProductDetails = () => {
     <Container className=' d-flex  align-items-center justify-content-evenly mt-5 mb-5'>
       <div >
         <div>
-          <img className='rounded' style={{ width: '500px', maxHeight: '500px', backgroundColor: '#ecf0f1' }} src={image} alt={'productimage'} />
+          <img className='rounded' style={{ width: '500px', maxHeight: '500px', backgroundColor: currentColor }} src={image} alt={'productimage'} />
           <div className="d-flex align-items-center justify-content-between mt-3">
-            <img className="p-1 rounded" style={{ width: '100px', backgroundColor: '#ecf0f1' }} src={image} alt={'productimage'} />
-            <img className="p-1 rounded" style={{ width: '100px', backgroundColor: '#ecf0f1' }} src={image} alt={'productimage'} />
-            <img className="p-1 rounded" style={{ width: '100px', backgroundColor: '#ecf0f1' }} src={image} alt={'productimage'} />
-            <img className="p-1 rounded" style={{ width: '100px', backgroundColor: '#ecf0f1' }} src={image} alt={'productimage'} />
+            <img className="p-1 rounded" style={{ width: '100px', backgroundColor: '#c0392b' }} src={image} alt={'productimage'} />
+            <img className="p-1 rounded" style={{ width: '100px', backgroundColor: '#2980b9' }} src={image} alt={'productimage'} />
+            <img className="p-1 rounded" style={{ width: '100px', backgroundColor: '#27ae60' }} src={image} alt={'productimage'} />
+            <img className="p-1 rounded" style={{ width: '100px', backgroundColor: '#d35400' }} src={image} alt={'productimage'} />
           </div>
         </div>
       </div>
@@ -47,7 +39,11 @@ const ProductDetails = () => {
         </h3>
         <p>Suggested Payments with 6 months special financing</p>
         <hr />
-        <p className='fs-4'>Chosse Color</p>
+        <div>
+          <p className='fs-4'>Choose Color</p>
+          <ThemeSetting />
+        </div>
+
 
         <hr />
         <div className="d-flex align-items-center flex-row" style={{ gap: "1rem" }}>
