@@ -9,11 +9,27 @@ export const ContextProvider = ({children}) => {
   const [ecommerceData, setEcommerceData] = useState([]);
   const [isopen, setIsOpen] = useState(false);
   const[cartItem, setCartItem] = useState([]);
-  console.log(cartItem);
-  
+  const [details, setDetails] = useState({});
+  //console.log(productDetails);
+  //console.log(cartItem);
+  //console.log(ecommerceData);
+  const cartQuantity = cartItem.reduce((quantity, item)=> item.quantity + quantity, 0)
+  //console.log(cartQuantity);
 
   const openCart = () => setIsOpen(true)
   const closeCart = () => setIsOpen(false)
+
+  const setProduct = (id) => {
+    const details = getProductDetails(id);
+    setDetails(details);
+  };
+
+  const getProductDetails = (id) => {
+    //console.log(id);
+    const details = ecommerceData.products.find(product => product.id === id);
+    console.log(details);
+    return details;
+  };
   
   useEffect(() => {
     const fetchData = async () => {
@@ -31,10 +47,13 @@ export const ContextProvider = ({children}) => {
   }, []);
 
   const addtoCart = (item) =>{
-    const productExist = cartItem.find(val => val.id === item.id); 
+    //console.log(item);
+    const productExist = cartItem.find((val) => val.id === item.id); 
 
     if(!productExist){
-        setCartItem([...cartItem, {...item, qty:1}])
+        setCartItem([...cartItem, {...item, quantity:1}])
+    }else{
+      console.log('Product is already added');
     }
   }
 
@@ -42,7 +61,7 @@ export const ContextProvider = ({children}) => {
 
 
   return (
-    <ShoppingCartContext.Provider value={{ecommerceData, openCart, isopen, closeCart, cartItem, addtoCart}}>
+    <ShoppingCartContext.Provider value={{ecommerceData, openCart, isopen, closeCart, cartItem, addtoCart, cartQuantity, details, setProduct}}>
       {children}
     </ShoppingCartContext.Provider>
   )

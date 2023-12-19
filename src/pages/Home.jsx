@@ -17,7 +17,7 @@ const Home = () => {
   return (
     <>
       <h2 className="font-bold mt-3 mb-3">Best Seller</h2>
-      <Container>
+      <Container className="mb-5">
         <Row md={2} xs={1} lg={4} className="g-5">
           {products.map((product) => (
             <Col key={product.id}>

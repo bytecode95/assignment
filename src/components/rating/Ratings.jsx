@@ -1,8 +1,15 @@
+import Rating from '@mui/material/Rating';
 
 
-const Ratings = () => {
+
+
+const Ratings = ({rating}) => {
+ 
+
   return (
-    <div>Ratings</div>
+    <div>
+       <Rating style={{color:'green'}} name="read-only" value={rating} readOnly />
+    </div>
   )
 }
 

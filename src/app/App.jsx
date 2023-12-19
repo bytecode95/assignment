@@ -1,5 +1,5 @@
-import { Header, ProductDetails } from '../components/index';
-import Home from '../pages/Home';
+import { Header} from '../components/index';
+import {Home, ProductDetail} from '../pages/index';
 import { ContextProvider } from '../context/ContextProvider';
 import './App.css'
 import { Container } from 'react-bootstrap';
@@ -15,7 +15,7 @@ function App() {
         <Container>
           <Routes>
             <Route path='/' element={<Home/>}/>
-            <Route path={'/productdetail/:id'} element={<ProductDetails/>}/>
+            <Route path={'/productdetail/:id'} element={<ProductDetail/>}/>
           </Routes>
         </Container>
       </ContextProvider>
