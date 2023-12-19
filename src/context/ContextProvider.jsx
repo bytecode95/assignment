@@ -1,19 +1,20 @@
+/* eslint-disable react/prop-types */
 
 import { useContext } from "react";
-import { createContext, useState , useEffect } from "react"
+import { createContext, useState, useEffect } from "react"
 
 
 const ShoppingCartContext = createContext();
 
-export const ContextProvider = ({children}) => {
+export const ContextProvider = ({ children }) => {
   const [ecommerceData, setEcommerceData] = useState([]);
   const [isopen, setIsOpen] = useState(false);
-  const[cartItem, setCartItem] = useState([]);
-  const [details, setDetails] = useState({});
+  const [cartItem, setCartItem] = useState([]);
+  const [details, setDetails] = useState([]);
   //console.log(productDetails);
-  //console.log(cartItem);
+  console.log(cartItem);
   //console.log(ecommerceData);
-  const cartQuantity = cartItem.reduce((quantity, item)=> item.quantity + quantity, 0)
+  const cartQuantity = cartItem.reduce((quantity, item) => item.quantity + quantity, 0)
   //console.log(cartQuantity);
 
   const openCart = () => setIsOpen(true)
@@ -27,10 +28,10 @@ export const ContextProvider = ({children}) => {
   const getProductDetails = (id) => {
     //console.log(id);
     const details = ecommerceData.products.find(product => product.id === id);
-    console.log(details);
+    //console.log(details);
     return details;
   };
-  
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -46,14 +47,42 @@ export const ContextProvider = ({children}) => {
     fetchData();
   }, []);
 
-  const addtoCart = (item) =>{
+  const addtoCart = (item) => {
     //console.log(item);
-    const productExist = cartItem.find((val) => val.id === item.id); 
+    const productExist = cartItem.find((val) => val.id === item.id);
 
-    if(!productExist){
-        setCartItem([...cartItem, {...item, quantity:1}])
-    }else{
+    if (!productExist) {
+      setCartItem([...cartItem, { ...item, quantity: 1 }])
+    } else {
       console.log('Product is already added');
+    }
+  }
+
+  const getItemQuantity = (id) => {
+    const qty = cartItem.find(item => item.id === id)?.quantity || 0
+    return qty;
+  }
+
+
+  const increaseQuantity = (item) => {
+    const productExist = cartItem.find((val) => val.id === item.id);
+    if (!productExist) {
+      setCartItem([...cartItem, {...item, quantity: 1 }])
+    } else {
+      setCartItem(cartItem.map((val)=>val.id === item.id ? 
+      {...val, quantity: val.quantity + 1}: val
+      ));
+    }
+  }
+
+  const decreaseQuantity = (item) => {
+    const productExist = cartItem.find((val) => val.id === item.id);
+    if (!productExist) {
+      setCartItem([...cartItem, {...item, quantity: 1 }])
+    } else {
+      setCartItem(cartItem.map((val)=>val.id === item.id ? 
+      {...val, quantity: val.quantity - 1}: val
+      ));
     }
   }
 
@@ -61,7 +90,7 @@ export const ContextProvider = ({children}) => {
 
 
   return (
-    <ShoppingCartContext.Provider value={{ecommerceData, openCart, isopen, closeCart, cartItem, addtoCart, cartQuantity, details, setProduct}}>
+    <ShoppingCartContext.Provider value={{ ecommerceData, openCart, isopen, closeCart, cartItem, addtoCart, cartQuantity, details, setProduct, increaseQuantity, decreaseQuantity, getItemQuantity }}>
       {children}
     </ShoppingCartContext.Provider>
   )
