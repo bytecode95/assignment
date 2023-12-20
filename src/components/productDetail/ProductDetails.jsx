@@ -11,7 +11,7 @@ const ProductDetails = () => {
 
   return (
 
-    <Container className=' d-flex  align-items-center justify-content-evenly mt-5 mb-5'>
+    <Container className=' d-flex flex-wrap align-items-center justify-content-evenly mt-5 mb-5'>
       <div >
         <div>
           <img className='rounded' style={{ width: '500px', maxHeight: '500px', backgroundColor: currentColor }} src={image} alt={'productimage'} />
